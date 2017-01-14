@@ -1,11 +1,19 @@
 let btn = document.getElementById("click");
 let display = document.getElementById("print");
 
+let neno = function (operation, listOfNums, sum) {
+    return `The operation "${operation}" applied to the array ${listOfNums} gives a result of ${sum}.`;
+}
+
+let sum = function (array, operation) {
+    let sum = 0;
+    for (let item in array) {
+        sum += operation(item);
+    }
+    return sum;
+}
 
 btn.addEventListener("click", function () {
-    let sum = 0;
-    let listOfNums = "";
-    display.innerHTML = "";
 
     let baseRequestURL = "https://raw.githubusercontent.com/sedc-codecademy/sedc5-ajs/master/homework-tasks/task-1/";
     let requestForPath = new XMLHttpRequest();
@@ -29,48 +37,15 @@ btn.addEventListener("click", function () {
                     let object = JSON.parse(requestForData.response);
 
                     if (object.operation === "log") {
-                        for (let i = 0; i < object.data.length; i++) {
-                            let result = Math.log(object.data[i]);
-                            sum += result;
-                            listOfNums += object.data[i] + ", "; 
-                        }
-                        listOfNums = listOfNums.replace(/,\s*$/, "");                        
-                        display.innerHTML = 'The operation ' + '"'+ object.operation +'"' + ' applied to the array '+ listOfNums + ' gives a result of ' + sum + '.';
-
+                        display.innerHTML = neno(object.operation, object.data, sum(object.data, x => Math.log(x)));
                     } else if (object.operation === "sine") {
-                        for (let i = 0; i < object.data.length; i++) {
-                            let result = Math.sin(object.data[i]);
-                            sum += result;
-                            listOfNums += object.data[i] + ", ";
-                        }
-                        listOfNums = listOfNums.replace(/,\s*$/, "");
-                        display.innerHTML = 'The operation ' + '"'+ object.operation +'"' + ' applied to the array '+ listOfNums + ' gives a result of ' + sum + '.';
-
+                        display.innerHTML = neno(object.operation, object.data, sum(object.data, x => Math.sin(x)));
                     } else if (object.operation === "cosine") {
-                        for (let i = 0; i < object.data.length; i++) {
-                            let result = Math.cos(object.data[i]);
-                            sum += result;
-                            listOfNums += object.data[i] + ", ";
-                        }
-                        listOfNums = listOfNums.replace(/,\s*$/, "");                        
-                        display.innerHTML = 'The operation ' + '"'+ object.operation +'"' + ' applied to the array '+ listOfNums + ' gives a result of ' + sum + '.';
+                        display.innerHTML = neno(object.operation, object.data, sum(object.data, x => Math.cos(x)));
                     } else if (object.operation === "square") {
-                        for (let i = 0; i < object.data.length; i++) {
-                            let result = Math.pow(object.data[i], 2);
-                            sum += result;
-                            listOfNums += object.data[i] + ", ";
-                        }
-                        listOfNums = listOfNums.replace(/,\s*$/, "");                        
-                        display.innerHTML = 'The operation ' + '"'+ object.operation +'"' + ' applied to the array '+ listOfNums + ' gives a result of ' + sum + '.';
-                        
+                        display.innerHTML = neno(object.operation, object.data, sum(object.data, x => x*x));
                     } else {
-                        for (let i = 0; i < object.data.length; i++) {
-                            let result = Math.pow(object.data[i], 3);
-                            sum += result;
-                            listOfNums += object.data[i] + ", ";
-                        }
-                        listOfNums = listOfNums.replace(/,\s*$/, "");                        
-                        display.innerHTML = 'The operation ' + '"'+ object.operation +'"' + ' applied to the array '+ listOfNums + ' gives a result of ' + sum + '.';              
+                        display.innerHTML = neno(object.operation, object.data, sum(object.data, x => x*x*x));                        
                     }
                 }
             }
@@ -78,3 +53,4 @@ btn.addEventListener("click", function () {
 
     }
 })
+
