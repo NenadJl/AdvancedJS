@@ -50,7 +50,6 @@ btn.addEventListener("click", function () {
                 }
             }
         }
-
     }
 })
 
