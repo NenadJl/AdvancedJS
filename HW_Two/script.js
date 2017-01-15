@@ -1,8 +1,8 @@
 let btn = document.getElementById("click");
 let display = document.getElementById("print");
 
-let print = function (operation, listOfNums, sum) {
-    return `The operation "${operation}" applied to the array ${listOfNums} gives a result of ${sum}.`;
+let print = function (input, sum) {
+    return `The operation "${input.operation}" applied to the array ${input.data} gives a result of ${sum}.`;
 }
 
 let sum = function (array, operation) {
@@ -36,15 +36,15 @@ btn.addEventListener("click", function () {
                     let object = JSON.parse(requestForData.response);
 
                     if (object.operation === "log") {
-                        display.innerHTML = print(object.operation, object.data, sum(object.data, x => Math.log(x)));
+                        display.innerHTML = print(object, sum(object.data, x => Math.log(x)));
                     } else if (object.operation === "sine") {
-                        display.innerHTML = print(object.operation, object.data, sum(object.data, x => Math.sin(x)));
+                        display.innerHTML = print(object, sum(object.data, x => Math.sin(x)));
                     } else if (object.operation === "cosine") {
-                        display.innerHTML = print(object.operation, object.data, sum(object.data, x => Math.cos(x)));
+                        display.innerHTML = print(object, sum(object.data, x => Math.cos(x)));
                     } else if (object.operation === "square") {
-                        display.innerHTML = print(object.operation, object.data, sum(object.data, x => x*x));
+                        display.innerHTML = print(object, sum(object.data, x => x*x));
                     } else {
-                        display.innerHTML = print(object.operation, object.data, sum(object.data, x => x*x*x));                        
+                        display.innerHTML = print(v, sum(object.data, x => x*x*x));                        
                     }
                 }
             }
