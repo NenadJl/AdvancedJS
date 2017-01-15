@@ -44,7 +44,7 @@ btn.addEventListener("click", function () {
                     } else if (object.operation === "square") {
                         display.innerHTML = print(object, sum(object.data, x => x*x));
                     } else {
-                        display.innerHTML = print(v, sum(object.data, x => x*x*x));                        
+                        display.innerHTML = print(object, sum(object.data, x => x*x*x));                        
                     }
                 }
             }
