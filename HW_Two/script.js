@@ -1,7 +1,7 @@
 let btn = document.getElementById("click");
 let display = document.getElementById("print");
 
-let neno = function (operation, listOfNums, sum) {
+let print = function (operation, listOfNums, sum) {
     return `The operation "${operation}" applied to the array ${listOfNums} gives a result of ${sum}.`;
 }
 
@@ -27,7 +27,6 @@ btn.addEventListener("click", function () {
             // take a path by random choice
             let randomPath = arrOfPaths[Math.floor(Math.random() * arrOfPaths.length)];
 
-
             let requestForData = new XMLHttpRequest();
             requestForData.open('GET', baseRequestURL + randomPath, true);
             requestForData.send(null);
@@ -37,15 +36,15 @@ btn.addEventListener("click", function () {
                     let object = JSON.parse(requestForData.response);
 
                     if (object.operation === "log") {
-                        display.innerHTML = neno(object.operation, object.data, sum(object.data, x => Math.log(x)));
+                        display.innerHTML = print(object.operation, object.data, sum(object.data, x => Math.log(x)));
                     } else if (object.operation === "sine") {
-                        display.innerHTML = neno(object.operation, object.data, sum(object.data, x => Math.sin(x)));
+                        display.innerHTML = print(object.operation, object.data, sum(object.data, x => Math.sin(x)));
                     } else if (object.operation === "cosine") {
-                        display.innerHTML = neno(object.operation, object.data, sum(object.data, x => Math.cos(x)));
+                        display.innerHTML = print(object.operation, object.data, sum(object.data, x => Math.cos(x)));
                     } else if (object.operation === "square") {
-                        display.innerHTML = neno(object.operation, object.data, sum(object.data, x => x*x));
+                        display.innerHTML = print(object.operation, object.data, sum(object.data, x => x*x));
                     } else {
-                        display.innerHTML = neno(object.operation, object.data, sum(object.data, x => x*x*x));                        
+                        display.innerHTML = print(object.operation, object.data, sum(object.data, x => x*x*x));                        
                     }
                 }
             }
