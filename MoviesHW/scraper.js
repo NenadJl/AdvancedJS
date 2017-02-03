@@ -1,5 +1,4 @@
 let mjs = [];
-let a;
 
 $(".lister-list tr").each(function () {
 
